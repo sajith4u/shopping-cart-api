@@ -1,5 +1,9 @@
 # Shopping Cart API GUIDE
 
+### Class Diagram
+
+![alt text](https://github.com/sajith4u/shopping-cart-api/blob/master/diagrams/class_diagram.jpg)
+
 ### How to Test API
 
 Go to ShoppingCartApiApplication.class & execute the main method.
