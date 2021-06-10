@@ -26,6 +26,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
     // Assumption : TOTAL VAT for Shopping Cart
     private static BigDecimal TOTAL_VAT = BigDecimal.valueOf(1500);
 
+    // Used to Save Shopping Carts
     private List<ShoppingCart> customerShoppingCarts = new ArrayList<>();
 
     public ShoppingCartServiceImpl(CustomerService customerService, ProductStorageService productStorageService) {
@@ -36,12 +37,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
     @Override
     public ShoppingCart createCart(ShoppingCartDto shoppingCartDto) {
 
-        ConcurrentHashMap<Product, Integer> products = new ConcurrentHashMap<>();
-
-        for (Map.Entry<String, Integer> entry : shoppingCartDto.getItems().entrySet()) {
-            Product product = productStorageService.findByProductId(entry.getKey());
-            products.merge(product, entry.getValue(), Integer::sum);
-        }
+        ConcurrentHashMap<Product, Integer> products = getSelectedProducts(shoppingCartDto);
 
         Customer customer = customerService.findCustomer(shoppingCartDto.getCustomerId());
 
@@ -55,6 +51,22 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 
         customerShoppingCarts.add(cart);
         return cart;
+    }
+
+    /**
+     * Get Selected Products in request
+     *
+     * @param shoppingCartDto
+     * @return
+     */
+    private ConcurrentHashMap<Product, Integer> getSelectedProducts(ShoppingCartDto shoppingCartDto) {
+        ConcurrentHashMap<Product, Integer> products = new ConcurrentHashMap<>();
+
+        for (Map.Entry<String, Integer> entry : shoppingCartDto.getItems().entrySet()) {
+            Product product = productStorageService.findByProductId(entry.getKey());
+            products.merge(product, entry.getValue(), Integer::sum);
+        }
+        return products;
     }
 
 }
