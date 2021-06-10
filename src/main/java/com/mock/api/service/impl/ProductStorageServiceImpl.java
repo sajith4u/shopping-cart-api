@@ -1,7 +1,7 @@
 package com.mock.api.service.impl;
 
 import com.mock.api.model.Product;
-import com.mock.api.network.AddProductRequest;
+import com.mock.api.dto.ProductDto;
 import com.mock.api.service.ProductStorageService;
 import com.mock.api.util.ApiError;
 import com.mock.api.util.CustomerException;
@@ -17,13 +17,13 @@ public class ProductStorageServiceImpl implements ProductStorageService {
     List<Product> products = new ArrayList<>();
 
     @Override
-    public Product addProduct(AddProductRequest addProductRequest) {
-        Product newProduct = Product.builder().name(addProductRequest.getName())
-                .discountPercentage(addProductRequest.getDiscountPercentage())
+    public Product addProduct(ProductDto productDto) {
+        Product newProduct = Product.builder().name(productDto.getName())
+                .discountPercentage(productDto.getDiscountPercentage())
                 .productId(UUID.randomUUID().toString())
-                .taxPercentage(addProductRequest.getTaxPercentage())
-                .title(addProductRequest.getTitle())
-                .price(addProductRequest.getPrice())
+                .taxPercentage(productDto.getTaxPercentage())
+                .title(productDto.getTitle())
+                .price(productDto.getPrice())
                 .build();
 
         boolean isProductAlreadyAvailable = products.contains(newProduct);

@@ -1,7 +1,7 @@
 package com.mock.api.service.impl;
 
 import com.mock.api.model.Product;
-import com.mock.api.network.AddProductRequest;
+import com.mock.api.dto.ProductDto;
 import com.mock.api.service.ProductStorageService;
 import com.mock.api.util.ProductException;
 import org.junit.jupiter.api.DisplayName;
@@ -19,7 +19,7 @@ class ProductStorageServiceImplTest {
     void testAddProduct() {
         ProductStorageService productStorageService = new ProductStorageServiceImpl();
 
-        AddProductRequest product = AddProductRequest.builder().name("Samsung Odyssey CRG9")
+        ProductDto product = ProductDto.builder().name("Samsung Odyssey CRG9")
                 .discountPercentage(5)
                 .price(BigDecimal.valueOf(150000))
                 .taxPercentage(10)
@@ -39,7 +39,7 @@ class ProductStorageServiceImplTest {
     void testDuplicateProduct() {
         ProductStorageService productStorageService = new ProductStorageServiceImpl();
 
-        AddProductRequest product = AddProductRequest.builder().name("Samsung Odyssey CRG9")
+        ProductDto product = ProductDto.builder().name("Samsung Odyssey CRG9")
                 .discountPercentage(5)
                 .price(BigDecimal.valueOf(150000))
                 .taxPercentage(10)

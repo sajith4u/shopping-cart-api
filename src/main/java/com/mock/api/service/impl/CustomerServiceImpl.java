@@ -1,7 +1,7 @@
 package com.mock.api.service.impl;
 
 import com.mock.api.model.Customer;
-import com.mock.api.network.AddCustomerRequest;
+import com.mock.api.dto.CustomerDto;
 import com.mock.api.service.CustomerService;
 import com.mock.api.util.ApiError;
 import com.mock.api.util.CustomerException;
@@ -17,10 +17,10 @@ public class CustomerServiceImpl implements CustomerService {
 
 
     @Override
-    public Customer addCustomer(AddCustomerRequest addCustomerRequest) {
+    public Customer addCustomer(CustomerDto customerDto) {
 
         // To Generate Id using UUID class which is thread safe.
-        Customer newCustomer = Customer.builder().name(addCustomerRequest.getName()).id(UUID.randomUUID().toString()).build();
+        Customer newCustomer = Customer.builder().name(customerDto.getName()).id(UUID.randomUUID().toString()).build();
         boolean isCustomerAlreadyRegistered = customerPool.contains(newCustomer);
 
         if (isCustomerAlreadyRegistered) {

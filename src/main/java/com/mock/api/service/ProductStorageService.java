@@ -1,17 +1,17 @@
 package com.mock.api.service;
 
 import com.mock.api.model.Product;
-import com.mock.api.network.AddProductRequest;
+import com.mock.api.dto.ProductDto;
 
 public interface ProductStorageService {
 
     /**
      * Add Product to Storage
      *
-     * @param addProductRequest
+     * @param productDto
      * @return
      */
-    Product addProduct(AddProductRequest addProductRequest);
+    Product addProduct(ProductDto productDto);
 
     /**
      * Find Product By ProductId

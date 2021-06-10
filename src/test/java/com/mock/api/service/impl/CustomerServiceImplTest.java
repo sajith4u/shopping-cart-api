@@ -1,7 +1,7 @@
 package com.mock.api.service.impl;
 
 import com.mock.api.model.Customer;
-import com.mock.api.network.AddCustomerRequest;
+import com.mock.api.dto.CustomerDto;
 import com.mock.api.service.CustomerService;
 import com.mock.api.util.CustomerException;
 import org.junit.jupiter.api.DisplayName;
@@ -16,7 +16,7 @@ class CustomerServiceImplTest {
     @DisplayName("Test Customer Creation")
     void testAddCustomer() {
         CustomerService customerService = new CustomerServiceImpl();
-        Customer customerDetails = customerService.addCustomer(new AddCustomerRequest("Sajith"));
+        Customer customerDetails = customerService.addCustomer(new CustomerDto("Sajith"));
 
         Customer customer = customerService.findCustomer(customerDetails.getId());
         assertNotNull(customer);
@@ -27,7 +27,7 @@ class CustomerServiceImplTest {
     @DisplayName("Test Duplicate Customer Name")
     void testDuplicateCustomer() {
         CustomerService customerService = new CustomerServiceImpl();
-        AddCustomerRequest customer = new AddCustomerRequest("Sajith");
+        CustomerDto customer = new CustomerDto("Sajith");
         customerService.addCustomer(customer);
 
         assertThrows(CustomerException.class, () -> {

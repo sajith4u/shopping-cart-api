@@ -3,7 +3,7 @@ package com.mock.api.service.impl;
 import com.mock.api.model.Customer;
 import com.mock.api.model.Product;
 import com.mock.api.model.ShoppingCart;
-import com.mock.api.network.CreateCartRequest;
+import com.mock.api.dto.ShoppingCartDto;
 import com.mock.api.service.CustomerService;
 import com.mock.api.service.ProductStorageService;
 import com.mock.api.service.ShoppingCartService;
@@ -34,16 +34,16 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
     }
 
     @Override
-    public ShoppingCart createCart(CreateCartRequest createCartRequest) {
+    public ShoppingCart createCart(ShoppingCartDto shoppingCartDto) {
 
         ConcurrentHashMap<Product, Integer> products = new ConcurrentHashMap<>();
 
-        for (Map.Entry<String, Integer> entry : createCartRequest.getItems().entrySet()) {
+        for (Map.Entry<String, Integer> entry : shoppingCartDto.getItems().entrySet()) {
             Product product = productStorageService.findByProductId(entry.getKey());
             products.merge(product, entry.getValue(), Integer::sum);
         }
 
-        Customer customer = customerService.findCustomer(createCartRequest.getCustomerId());
+        Customer customer = customerService.findCustomer(shoppingCartDto.getCustomerId());
 
         ShoppingCart cart = ShoppingCart.builder()
                 .products(products)

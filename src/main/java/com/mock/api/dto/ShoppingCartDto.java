@@ -1,4 +1,4 @@
-package com.mock.api.network;
+package com.mock.api.dto;
 
 import lombok.*;
 
@@ -9,7 +9,7 @@ import java.util.Map;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class CreateCartRequest {
+public class ShoppingCartDto {
     private String customerId;
 
     // productId with quantity

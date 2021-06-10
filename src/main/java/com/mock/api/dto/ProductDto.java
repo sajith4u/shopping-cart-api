@@ -1,4 +1,4 @@
-package com.mock.api.network;
+package com.mock.api.dto;
 
 import lombok.*;
 
@@ -9,7 +9,7 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class AddProductRequest {
+public class ProductDto {
     private String name;
     private String title;
     private float taxPercentage;
