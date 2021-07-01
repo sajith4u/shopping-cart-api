@@ -31,8 +31,12 @@ public class ShoppingCart implements CartItem {
         BigDecimal discountPrice = BigDecimal.ZERO;
         for (Map.Entry<Product, Integer> prodEntry : products.entrySet()) {
             productPrice = productPrice.add(prodEntry.getKey().getPrice().multiply(BigDecimal.valueOf(prodEntry.getValue())));
+
+            // Calculate Tax Price
             taxPrice = taxPrice.add(prodEntry.getKey().getPrice().multiply(BigDecimal.valueOf(prodEntry.getKey()
                     .getTaxPercentage())).divide(BigDecimal.valueOf(100)));
+
+            // Calculate Discount
             discountPrice = discountPrice.add(prodEntry.getKey().getPrice().multiply(BigDecimal.valueOf(prodEntry.getKey().getDiscountPercentage()))
                     .divide(BigDecimal.valueOf(100)));
         }
